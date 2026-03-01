@@ -67,11 +67,16 @@
             const tiltX = ((y - centerY) / centerY) * -6;
             const tiltY = ((x - centerX) / centerX) * 6;
 
+            // Disable transition during active tilt to prevent "jitter" or "flicker"
+            el.style.transition = 'none';
+
             // Apply slight lift and 3D rotation
             el.style.transform = `translateY(-6px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
         });
 
         el.addEventListener('mouseleave', () => {
+            // Restore smooth transition for the reset
+            el.style.transition = '';
             // Clear inline style to allow CSS transition to smoothly reset the card
             el.style.transform = '';
         });
